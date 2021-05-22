@@ -5,7 +5,6 @@ module.exports = {
   pwa: {
     name: "ท่องศัพท์ By Frame ",
     themeColor: "#4DBA87",
-    msTileColor: "#000000",
     appleMobileWebAppCapable: "yes",
     appleMobileWebAppStatusBarStyle: "black",
   },

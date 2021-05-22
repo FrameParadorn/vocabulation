@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar app>
+    <v-app-bar app color="#4DBA87" dark>
       <h1>Vocabulation</h1>
     </v-app-bar>
 
@@ -28,7 +28,9 @@
             required
             autocomplete="off"
           ></v-text-field>
-          <v-btn block color="success" elevation="2" large type="submit">OK</v-btn>
+          <v-btn block color="#4DBA87" dark elevation="2" large type="submit"
+            >OK</v-btn
+          >
         </v-form>
 
         <h1 class="mt-10">คำที่ถูกก่อนหน้า</h1>
@@ -40,10 +42,10 @@
           :length="Math.ceil(vocabulations.length / 10)"
           :total-visible="7"
           class="mt-10"
+          color="#4DBA87"
         ></v-pagination>
 
         <router-view></router-view>
-
       </v-container>
     </v-main>
 
@@ -75,7 +77,7 @@ export default {
     onSubmit: function() {
       if (this.answer === this.question.english) {
         this.oldCorrect = this.question;
-        this.random()
+        this.random();
         this.fail = false;
       } else {
         this.fail = true;
@@ -83,9 +85,9 @@ export default {
       this.clearAnswer();
     },
     random: function() {
-      const min = ( this.page - 1 ) * 10 
-      const max = this.vocabulations.length - 1
-      const random = Math.floor(Math.random() * (max - min + 1) ) + min;
+      const min = (this.page - 1) * 10;
+      const max = this.vocabulations.length - 1;
+      const random = Math.floor(Math.random() * (max - min + 1)) + min;
       this.question = this.vocabulations[random];
     },
     focusAnswer: function() {
@@ -103,8 +105,8 @@ export default {
   },
   watch: {
     page: function() {
-      this.random()
-    } 
-  }
+      this.random();
+    },
+  },
 };
 </script>
