@@ -1,6 +1,5 @@
 module.exports = {
-  publicPath: "/vocabulation/",
-  transpileDependencies: [
-    'vuetify'
-  ]
-}
+  publicPath: process.env.NODE_ENV === "production" ? "/vocabulation/" : "/",
+  outputDir: process.env.NODE_ENV === "production" ? "docs" : "dist",
+  transpileDependencies: ["vuetify"],
+};
