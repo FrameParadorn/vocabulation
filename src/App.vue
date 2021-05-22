@@ -26,6 +26,7 @@
             v-model="answer"
             label="Answer"
             required
+            autocomplete="off"
           ></v-text-field>
           <v-btn block color="success" elevation="2" large type="submit">OK</v-btn>
         </v-form>

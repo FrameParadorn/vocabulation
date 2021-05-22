@@ -4,11 +4,11 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
     "build": "vue-cli-service build && git add . && git commit -am 'Update page' && git push",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@vue/cli-plugin-pwa": "^4.5.13",
     "core-js": "^3.6.5",
     "firebase": "^8.6.2",
     "node-sass": "^6.0.0",
