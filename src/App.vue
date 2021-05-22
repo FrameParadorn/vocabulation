@@ -14,7 +14,7 @@
           >ไม่ถูกต้อง</v-alert
         >
 
-        <v-card elevation="2" class="pa-5 mt-10">
+        <v-card elevation="2" class="pa-10 mt-10">
           <v-row justify="center">
             <h1 v-if="!!question.thai">{{ question.thai }}</h1>
           </v-row>
@@ -100,5 +100,10 @@ export default {
 
     this.random();
   },
+  watch: {
+    page: function() {
+      this.random()
+    } 
+  }
 };
 </script>
