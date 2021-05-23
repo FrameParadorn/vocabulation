@@ -4661,6 +4661,11 @@ globule@^1.0.0:
     lodash "~4.17.10"
     minimatch "~3.0.2"
 
+google-translate-tts@^0.4.0-dev:
+  version "0.4.0-dev"
+  resolved "https://registry.yarnpkg.com/google-translate-tts/-/google-translate-tts-0.4.0-dev.tgz#6e557e955add01d7341dc8009dc3843ec1e9b5de"
+  integrity sha512-UioovR3V/17rDBMVFkKTXcJPWSTwjxcqe9GKhmZqqwVlnUThY4SKQ5NJdmEuIGzlzj0apHGPQRShDz7I347+vw==
+
 graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.1.6, graceful-fs@^4.2.3:
   version "4.2.6"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.6.tgz#ff040b2b0853b23c3d31027523706f1885d76bee"

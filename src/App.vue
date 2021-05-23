@@ -2,6 +2,8 @@
   <v-app>
     <v-app-bar app color="#4DBA87" dark>
       <h1>Vocabulation</h1>
+      <v-spacer></v-spacer>
+      <h3>Score: {{ score.current }} | Max : {{ score.max }}</h3>
     </v-app-bar>
 
     <v-main>
@@ -32,6 +34,8 @@
             >OK</v-btn
           >
         </v-form>
+
+        <v-btn elevation="2" large class="mt-5" @click="random">Re-random</v-btn>
 
         <h1 class="mt-10">คำที่ถูกก่อนหน้า</h1>
         <h3 class="success--text" v-if="!!oldCorrect.thai">
@@ -68,26 +72,46 @@ export default {
       answer: "",
       oldCorrect: {},
       vocabulations: [],
+      score: {
+        current: 0,
+        max: 0,
+      }
     };
   },
   methods: {
     clearAnswer: function() {
       this.answer = "";
     },
+    cleanWord(word) {
+      word = word.trim()
+      word = word.replaceAll("-", "")
+      word = word.toLowerCase()
+      word = word.split(" ")
+      word = word.join("")
+      return word
+    },
     onSubmit: function() {
-      if (this.answer === this.question.english) {
+      
+      if (this.cleanWord(this.answer) === this.cleanWord(this.question.english)) {
         this.oldCorrect = this.question;
         this.random();
         this.fail = false;
+        this.score.current++
+        if(this.score.current > this.score.max) {
+          this.score.max = this.score.current
+        }
       } else {
         this.fail = true;
+        this.score.current = 0
       }
       this.clearAnswer();
     },
     random: function() {
-      const min = (this.page - 1) * 10;
-      const max = this.vocabulations.length - 1;
+      const limit = 10
+      const min = (this.page - 1) * limit;
+      const max = min + limit;
       const random = Math.floor(Math.random() * (max - min + 1)) + min;
+      console.log(min, max, random)
       this.question = this.vocabulations[random];
     },
     focusAnswer: function() {
@@ -102,6 +126,7 @@ export default {
     }
 
     this.random();
+
   },
   watch: {
     page: function() {

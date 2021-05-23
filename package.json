@@ -11,6 +11,7 @@
     "@vue/cli-plugin-pwa": "^4.5.13",
     "core-js": "^3.6.5",
     "firebase": "^8.6.2",
+    "google-translate-tts": "^0.4.0-dev",
     "node-sass": "^6.0.0",
     "vue": "^2.6.11",
     "vue-router": "^3.5.1",

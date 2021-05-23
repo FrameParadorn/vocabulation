@@ -14,8 +14,6 @@ var db = firebaseApp.database();
 
 const vocab = db.ref("vocab")
 
-console.log(vocab)
-
 export {
   vocab
 }
