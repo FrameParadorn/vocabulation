@@ -35,7 +35,23 @@
           >
         </v-form>
 
-        <v-btn elevation="2" large class="mt-5" @click="random">Re-random</v-btn>
+        <v-row class="mt-5" >
+          <v-col>
+            <v-btn elevation="2" large @click="random"
+              >Re-random</v-btn
+            >
+          </v-col>
+          <v-col>
+            <v-text-field
+              type="number"
+              :min="maxNotRepeat"
+              v-model="maxWordOfPage"
+              required
+              label="จำนวนคำที่จะนำมาสุ่มต่อ 1 หน้า"
+            />
+          </v-col>
+          <v-spacer />
+        </v-row>
 
         <h1 class="mt-10">คำที่ถูกก่อนหน้า</h1>
         <h3 class="success--text" v-if="!!oldCorrect.thai">
@@ -43,7 +59,7 @@
         </h3>
         <v-pagination
           v-model="page"
-          :length="Math.ceil(vocabulations.length / 10)"
+          :length="Math.ceil(vocabulations.length / ( maxWordOfPage || 1))"
           :total-visible="7"
           class="mt-10"
           color="#4DBA87"
@@ -68,14 +84,17 @@ export default {
     return {
       fail: false,
       page: 1,
+      maxWordOfPage: 10,
+      maxNotRepeat: 3,
       question: {},
+      lastQuestion: [],
       answer: "",
       oldCorrect: {},
       vocabulations: [],
       score: {
         current: 0,
         max: 0,
-      }
+      },
     };
   },
   methods: {
@@ -83,36 +102,53 @@ export default {
       this.answer = "";
     },
     cleanWord(word) {
-      word = word.trim()
-      word = word.replaceAll("-", "")
-      word = word.toLowerCase()
-      word = word.split(" ")
-      word = word.join("")
-      return word
+      word = word.trim();
+      word = word.replaceAll("-", "");
+      word = word.toLowerCase();
+      word = word.split(" ");
+      word = word.join("");
+      return word;
     },
     onSubmit: function() {
-      
-      if (this.cleanWord(this.answer) === this.cleanWord(this.question.english)) {
+      if (
+        this.cleanWord(this.answer) === this.cleanWord(this.question.english)
+      ) {
         this.oldCorrect = this.question;
         this.random();
         this.fail = false;
-        this.score.current++
-        if(this.score.current > this.score.max) {
-          this.score.max = this.score.current
+        this.score.current++;
+        if (this.score.current > this.score.max) {
+          this.score.max = this.score.current;
         }
       } else {
         this.fail = true;
-        this.score.current = 0
+        this.score.current = 0;
       }
       this.clearAnswer();
     },
+    addLastQuestion: function(question) {
+      this.lastQuestion.push(question.english);
+      if (this.lastQuestion.length > this.maxNotRepeat) {
+        this.lastQuestion.shift();
+      }
+    },
+    hasLastQuestion: function(newQuestion) {
+      const result = this.lastQuestion.find(
+        (question) => question === newQuestion.english,
+      );
+      return !!result;
+    },
     random: function() {
-      const limit = 10
+      const limit = this.maxWordOfPage;
       const min = (this.page - 1) * limit;
-      const max = min + limit;
+      const max = parseInt(min + limit);
       const random = Math.floor(Math.random() * (max - min + 1)) + min;
-      console.log(min, max, random)
       this.question = this.vocabulations[random];
+      if (this.hasLastQuestion(this.question)) {
+        this.random();
+      } else {
+        this.addLastQuestion(this.question);
+      }
     },
     focusAnswer: function() {
       this.$refs.answer.focus();
@@ -126,12 +162,16 @@ export default {
     }
 
     this.random();
-
   },
   watch: {
     page: function() {
       this.random();
     },
+    maxWordOfPage: function() {
+      if(this.maxWordOfPage < this.maxNotRepeat) {
+        this.maxWordOfPage = this.maxNotRepeat
+      }
+    }
   },
 };
 </script>
