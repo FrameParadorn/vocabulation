@@ -16,12 +16,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/vocabulation/favicon-32x32.png"
   },
   {
-    "revision": "cb52ed02e02cac6f9b0218511bdce510",
+    "revision": "3a11ca0be72026208dae58ec3ab57f2e",
     "url": "/vocabulation/index.html"
   },
   {
-    "revision": "878377ec9aeffb90534b",
-    "url": "/vocabulation/js/app.58a36d0a.js"
+    "revision": "695fb2176e8cc93a9e90",
+    "url": "/vocabulation/js/app.5304d65f.js"
   },
   {
     "revision": "2799f7de14d161fae90a",
