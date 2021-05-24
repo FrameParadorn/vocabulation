@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/vocabulation/precache-manifest.fa612700f8761708425c4c2223683d77.js"
+  "/vocabulation/precache-manifest.cc22daf15e75ff6cc14da2617202338d.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "vocab"});
