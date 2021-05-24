@@ -141,8 +141,9 @@ export default {
     random: function() {
       const limit = this.maxWordOfPage;
       const min = (this.page - 1) * limit;
-      const max = parseInt(min + limit);
+      const max = parseInt(min) + parseInt(limit);
       const random = Math.floor(Math.random() * (max - min + 1)) + min;
+      console.log(limit, min, max, random)
       this.question = this.vocabulations[random];
       if (this.hasLastQuestion(this.question)) {
         this.random();
